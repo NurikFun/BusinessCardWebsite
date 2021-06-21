@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BusinessCardWebsite.Models.Project>
+
+@{
+    ViewBag.Title = "Портфолио";
+}
+
+
+
+<div class="pt-2 pb-4 row">
+    <div class="col-sm col-md-2 mr-sm-2">Направление:</div>
+    <div class="col-sm">
+        @Html.ActionLink("Все", "Index", new { id = 0 }, new { @class = "m-1" })
+    </div>
+
+
+    @foreach (var direction in ViewBag.directions)
+    {
+        string name = @direction.name;
+
+        <div class="col-sm">
+            @Html.ActionLink(name, "Index", new { id = direction.id }, new { @class = "m-1" })
+        </div>
+    }
+
+</div>
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4 mb-4">
+            <div class="card">
+                <img src="@item.img_path" class="card-img-top w-100 h-100 m-auto">
+
+                <div class="card-body">
+                    <h5 class="card-title">
+                        @Html.DisplayFor(modelItem => item.name)
+                    </h5>
+                    <p class="card-text">
+                        @Html.DisplayFor(modelItem => item.description)
+                    </p>
+                    @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-light mt-1" })
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Изменить", "Edit", new { id = item.id }, new { @class = "btn btn-light mt-1" })
+                        @Html.ActionLink("Удалить", "Delete", new { id = item.id }, new { @class = "btn btn-danger mt-1" })
+                    }
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

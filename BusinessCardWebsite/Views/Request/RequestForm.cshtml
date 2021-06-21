@@ -1,0 +1,68 @@
+﻿@model BusinessCardWebsite.Models.Request
+
+<hr />
+
+<div class="m-auto text-center m-4 pb-5">
+    <h2>Хотите реализовать проект вместе с нами?</h2>
+    Расскажите о своей задаче. Мы ответим вам сегодня или на следующий рабочий день.
+</div>
+
+@using (Html.BeginForm("Create", "Request", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label" })*
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label" })*
+            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "control-label" })*
+            @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.company_name, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.company_name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.company_name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.estimated_budget, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.estimated_budget, ViewBag.budgets as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.estimated_budget, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.field, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.field, ViewBag.fields as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.field, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label" })
+        @Html.TextAreaFor(model => model.description, new { @class = "form-control", @rows = 3 })
+        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group text-center">
+        <input type="submit" value="Отправить" class="btn btn-primary" />
+    </div>
+}
+

@@ -1,0 +1,121 @@
+﻿@model BusinessCardWebsite.Models.Project
+
+@{
+    ViewBag.Title = "Изменить проект";
+}
+
+
+<link href="~/Scripts/summernote/summernote-bs4.min.css" rel="stylesheet">
+<script src="~/Scripts/summernote/summernote-bs4.min.js"></script>
+
+
+
+<div class="input-group mt-3 mb-3">
+    <div class="custom-file">
+        <input type="file" id="img" name="img" accept="image/jpeg,image/png,image/gif" class="custom-file-input">
+        <label class="custom-file-label" for="img" data-browse="Просмотреть">Главное изображение</label>
+    </div>
+    <div class="input-group-append">
+        <button class="btn btn-primary" onclick="clickUpload('#img', showImage)">Загрузить</button>
+    </div>
+</div>
+<div id="div_img" class="mt-2 mb-2">
+    <div>
+        <img src="@Model.img_path" class="img_view"><br />
+        <button class="btn btn_delete" onclick="requestRemoveFile(this, '@Model.img_path')">&#215;</button>
+    </div>
+</div>
+
+
+
+<div class="input-group mt-3 mb-3">
+    <div class="custom-file">
+        <input type="file" multiple id="imgs" name="imgs" accept="image/jpeg,image/png,image/gif" class="custom-file-input">
+        <label class="custom-file-label" for="imgs" data-browse="Просмотреть">Изображения проекта</label>
+    </div>
+    <div class="input-group-append">
+        <button class="btn btn-primary" onclick="clickUpload('#imgs', showImages)">Загрузить</button>
+    </div>
+</div>
+
+<div class="mt-2 mb-2 d-flex">
+    @foreach (var item in Model.images)
+    {
+        <div>
+            <img src="@item.img_path" class="img_view"><br />
+            <button class="btn btn_delete" onclick="requestRemoveFileDb(this, '@item.img_path')">&#215;</button>
+        </div>
+    }
+</div>
+
+<div id="div_imgs" class="mt-2 mb-2 d-flex"></div>
+
+
+
+<div class="input-group mt-3 mb-3">
+    <div class="custom-file">
+        <input type="file" id="doc" name="doc" accept=".doc, .docx, application/pdf" class="custom-file-input">
+        <label class="custom-file-label" for="doc" data-browse="Просмотреть">Документ проекта</label>
+    </div>
+    <div class="input-group-append">
+        <button class="btn btn-primary" onclick="clickUpload('#doc', showDocument)">Загрузить</button>
+    </div>
+</div>
+<div id="div_doc" class="mt-2 mb-2">
+
+    <div>
+        <a href="@Model.doc_path"> Файл @Model.doc_path</a>
+        <button class="btn btn-light" onclick="requestRemoveFile(this, '@Model.doc_path')">Удалить</button>
+    </div>
+
+</div>
+
+
+
+
+<div class="mt-5">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.direction_id)
+            @Html.DropDownListFor(model => model.direction_id, ViewBag.directions as SelectList, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name)
+            @Html.TextBoxFor(model => model.name, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description)
+            @Html.TextAreaFor(model => model.description, new { @class = "form-control", @rows = 3 })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.content)
+            @Html.TextAreaFor(model => model.content, new { @class = "form-control" })
+        </div>
+
+        <div id="hidden_img">
+            <input id="img_path" name="img_path" type="hidden" value="@Model.img_path" />
+        </div>
+        <div id="hidden_imgs"></div>
+        <div id="hidden_doc">
+            <input id="doc_path" name="doc_path" type="hidden" value="@Model.doc_path" />
+        </div>
+
+        <button type="submit" id="btnSubmitProject" class="btn btn-primary">Сохранить</button>
+    }
+
+</div>
+
+
+
+<script src="~/Scripts/upload.js"></script>
+
+<div>
+    @Html.ActionLink("Вернутся к просмотру портфолио", "Index")
+</div>

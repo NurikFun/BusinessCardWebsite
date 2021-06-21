@@ -1,0 +1,12 @@
+﻿@model IEnumerable<BusinessCardWebsite.Models.Direction>
+
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        @Html.ActionLink(item.name, "Details", new { id = item.id }, new { @class = "dropdown-item" })
+    }
+}
+
+

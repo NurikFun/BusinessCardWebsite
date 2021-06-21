@@ -1,0 +1,128 @@
+﻿@model IEnumerable<BusinessCardWebsite.Models.Direction>
+
+@{
+    ViewBag.Title = "Главная";
+}
+
+<link rel="stylesheet" href="~/Scripts/owlcarousel/owl.carousel.min.css">
+<link rel="stylesheet" href="~/Scripts/owlcarousel/owl.theme.default.min.css">
+<script src="~/Scripts/owlcarousel/owl.carousel.min.js"></script>
+
+
+
+
+<div id="card_directions">
+    <div id="owl-carousel" class="owl-carousel owl-theme">
+
+
+        @foreach (var item in Model)
+        {
+            <div class="item">
+                <div class="mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-5">
+                            <img src="@item.img_path" class="card-img" alt="image">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body ml-2">
+                                <h1 class="card-title">
+                                    @Html.Raw(item.name)
+                                </h1>
+                                <p class="card-text">
+                                    @Html.Raw(item.description)
+                                </p>
+                                @Html.ActionLink("Подробнее", "Details", "Direction", new { id = item.id }, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<div class="row no-gutters">
+    <div class="col-md-6">
+        <div class="card-body">
+            <h5 class="card-title">О нас</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            
+            <div class="row">
+                <div class="col-4">
+                    <span class="h1 text-primary">100</span> экспертов
+                </div>
+                <div class="col-4">
+                    <span class="h1 text-primary">10</span> лет на рынке
+                </div>
+                <div class="col-4">
+                    <span class="h1 text-primary">325+</span> проектов
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-6 text-center">
+                    <span class="h1 text-primary">1 млн+</span> устройст
+                </div>
+                <div class="col-6">
+                    <span class="h1 text-primary">10</span> лет на рынке
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card-body">
+            <h5 class="card-title">НИИ за 60 секунд</h5>
+            <p class="card-text">
+                <img src="~/Content/img/img_600_400.png" class="card-img" alt="image">
+
+            </p>
+        </div>
+    </div>
+</div>
+
+<div>
+    <h2>
+        Наши партнеры и клиенты
+    </h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    </p>
+
+</div>
+
+<div class="row text-center m-auto">
+
+    <img src="~/Content/img/img_200_100.png" width="210" height="100" class="m-2" alt="image">
+    <img src="~/Content/img/img_200_100.png" width="210" height="100" class="m-2" alt="image">
+    <img src="~/Content/img/img_200_100.png" width="210" height="100" class="m-2" alt="image">
+    <img src="~/Content/img/img_200_100.png" width="210" height="100" class="m-2" alt="image">
+
+</div>
+
+
+
+
+<script>
+    $('#owl-carousel').owlCarousel({
+        loop: true,
+        margin: 30,
+        dots: true,
+        nav: true,
+        items: 1,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true
+    })
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        $('#request_form').load('@Url.Action("RequestForm", "Request")');
+    });
+
+</script>
+
+
+
+

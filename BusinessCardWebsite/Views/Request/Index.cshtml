@@ -1,0 +1,73 @@
+﻿@model IEnumerable<BusinessCardWebsite.Models.Request>
+
+@{
+    ViewBag.Title = "Заявки";
+}
+
+<a href="~/Project/DownloadUploadFolder">Скачать папку Upload</a>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.company_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estimated_budget)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.field)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.description)
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+        <tbody>
+
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.company_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estimated_budget)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.field)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.description)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }) |
+                        @Html.ActionLink("Удалить", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>

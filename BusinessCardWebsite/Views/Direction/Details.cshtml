@@ -1,0 +1,27 @@
+﻿@model BusinessCardWebsite.Models.Direction
+
+@{
+    ViewBag.Title = Model.name;
+}
+<hr />
+
+
+<div>
+    @Html.Raw(Model.content)
+</div>
+
+<p>
+    @Html.ActionLink("На главную страницу", "Index", "Home")
+
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            @Html.ActionLink("Изменить", "Edit", new { id = Model.id }, new { @class = "btn btn-light" })
+            @Html.ActionLink("Удалить", "Delete", new { id = Model.id }, new { @class = "btn btn-danger" })
+        </div>
+
+    }
+
+</p>
+

@@ -1,0 +1,180 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title - НИИ</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/summernote/popper/popper.min.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <style>
+
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary1 fixed-top pt-3 pb-3">
+            <div class="container">
+                @Html.ActionLink("НИИ", "Index", "Home", null, new { @class = "navbar-brand" })
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+                    <ul class="navbar-nav ml-auto">
+
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item active">
+                                @Html.ActionLink("Заявки", "Index", "Request", null, new { @class = "nav-link" })
+                            </li>
+
+                            <li class="nav-item dropdown active">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Добавить
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @Html.ActionLink("В портфолио", "Create", "Project", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("В направление", "Create", "Direction", null, new { @class = "dropdown-item" })
+                                </div>
+                            </li>
+                        }
+
+
+
+                        <li class="nav-item active">
+                            @Html.ActionLink("Главная", "Index", "Home", null, new { @class = "nav-link" })
+                        </li>
+
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Разработка
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Разработка под ключ</a>
+                                <div class="dropdown-divider"></div>
+                                <div id="directions" class="m-0 p-0"></div>
+
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Производство
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @Html.ActionLink("Постановка", "Formulation", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Тестирование", "Formulation", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Изготовление", "Formulation", "Home", null, new { @class = "dropdown-item" })
+
+                            </div>
+                        </li>
+
+                        <li class="nav-item active">
+                            @Html.ActionLink("Портфолио", "Index", "Project", null, new { @class = "nav-link" })
+                        </li>
+
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Компания
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @Html.ActionLink("О компании", "About", "Home", null, new { @class = "dropdown-item" })
+                            </div>
+                        </li>
+
+                        <li class="nav-item active">
+                            @Html.ActionLink("Контакты", "Contact", "Home", null, new { @class = "nav-link" })
+                        </li>
+
+
+
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item active">
+                                @Html.ActionLink("Выйти", "Index", "Account", null, new { @class = "nav-link" })
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+
+        </nav>
+    </header>
+
+    @if (ViewBag.Title == "Главная")
+    {
+        <div class="container n_mt-3 px-3 py-3 pt-md-5 pb-md-4"></div>
+    }
+    else
+    {
+        <div class="container n_mt-4">
+            <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+                <h1 class="display-4">@ViewBag.Title</h1>
+            </div>
+        </div>
+    }
+
+
+
+
+    <div class="container">
+
+        @RenderBody()
+
+        <div id="request_form"></div>
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+                <div class="col-12 col-md">
+                    <small class="d-block mb-3 text-muted">&copy; @DateTime.Now.Year НИИ</small>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Разработка</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Програмное обеспечение</a></li>
+                        <li><a class="text-muted" href="#">Электроника</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Производство</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Тестирование</a></li>
+                        <li><a class="text-muted" href="#">Изготовление</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Компания</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">О компании</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+
+
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#directions').load('@Url.Action("LinkListDirections", "Direction")');
+
+    });
+
+    </script>
+
+</body>
+</html>
